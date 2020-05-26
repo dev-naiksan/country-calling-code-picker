@@ -1,4 +1,4 @@
-# countrycodepicker
+# Country Calling Code Picker
 
 Searchable country picker widget ready to user in a dialog, bottom sheet and even in full screen!
 
