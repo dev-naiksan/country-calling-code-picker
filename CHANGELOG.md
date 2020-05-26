@@ -1,1 +1,2 @@
-Version 1.0 contains a basic CountryPickerWidget with search option.
+## [v0.0.1] - 26-05-2020
+ *Contains a basic CountryPickerWidget with search option.
