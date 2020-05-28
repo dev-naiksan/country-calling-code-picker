@@ -5,10 +5,33 @@ import 'package:flutter/material.dart';
 import 'country.dart';
 import 'functions.dart';
 
+const TextStyle _defaultItemTextStyle = const TextStyle(fontSize: 16);
+const TextStyle _defaultSearchInputStyle = const TextStyle(fontSize: 16);
+
 class CountryPickerWidget extends StatefulWidget {
+  /// This callback will be called on selection of a [Country].
   final ValueChanged<Country> onSelected;
 
-  const CountryPickerWidget({Key key, this.onSelected}) : super(key: key);
+  /// [itemTextStyle] can be used to change the TextStyle of the Text in ListItem. Default is [_defaultItemTextStyle]
+  final TextStyle itemTextStyle;
+
+  /// [searchInputStyle] can be used to change the TextStyle of the Text in SearchBox. Default is [searchInputStyle]
+  final TextStyle searchInputStyle;
+
+  /// Flag icon size (width). Default set to 32.
+  final double flagIconSize;
+
+  ///Can be set to `true` for showing the List Separator. Default set to `false`
+  final bool showSeparator;
+
+  const CountryPickerWidget({
+    Key key,
+    this.onSelected,
+    this.itemTextStyle = _defaultItemTextStyle,
+    this.searchInputStyle = _defaultSearchInputStyle,
+    this.flagIconSize = 32,
+    this.showSeparator = true,
+  }) : super(key: key);
 
   @override
   _CountryPickerWidgetState createState() => _CountryPickerWidgetState();
@@ -45,7 +68,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
   }
 
   void loadList() async {
-    _list = await getCountries(context);
+    _list = await Utils.getCountries(context);
     setState(() {
       _filteredList = _list.map((e) => e).toList();
     });
@@ -62,19 +85,40 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 24, right: 24),
-            child: TextField(
-              textInputAction: TextInputAction.done,
-              controller: _controller,
-              onChanged: _onSearch,
+            child: SizedBox(
+              height: 52,
+              child: TextField(
+                style: widget.searchInputStyle,
+                decoration: InputDecoration(
+                    suffixIcon: Visibility(
+                      visible: _controller.text.isNotEmpty,
+                      child: InkWell(
+                        child: Icon(Icons.clear),
+                        onTap: () => setState(() {
+                          _controller.clear();
+                          _filteredList.clear();
+                          _filteredList.addAll(_list);
+                        }),
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(),
+                        borderRadius: BorderRadius.circular(30))),
+                textInputAction: TextInputAction.done,
+                controller: _controller,
+                onChanged: _onSearch,
+              ),
             ),
           ),
           SizedBox(
             height: 16,
           ),
           Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.all(0),
+            child: ListView.separated(
+              padding: EdgeInsets.only(top: 16),
               itemCount: _filteredList.length,
+              separatorBuilder: (_, index) =>
+                  widget.showSeparator ? Divider() : Container(),
               itemBuilder: (_, index) {
                 return InkWell(
                   onTap: () {
@@ -88,7 +132,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                         Image.asset(
                           _filteredList[index].flag,
                           package: 'country_calling_code_picker',
-                          width: 32,
+                          width: widget.flagIconSize,
                         ),
                         SizedBox(
                           width: 16,
@@ -96,7 +140,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                         Expanded(
                             child: Text(
                           '${_filteredList[index].callingCode} ${_filteredList[index].name}',
-                          style: TextStyle(fontSize: 15),
+                          style: widget.itemTextStyle,
                         )),
                       ],
                     ),
