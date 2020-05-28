@@ -18,6 +18,9 @@ class CountryPickerWidget extends StatefulWidget {
   /// [searchInputStyle] can be used to change the TextStyle of the Text in SearchBox. Default is [searchInputStyle]
   final TextStyle searchInputStyle;
 
+  /// [searchInputDecoration] can be used to change the decoration for SearchBox.
+  final InputDecoration searchInputDecoration;
+
   /// Flag icon size (width). Default set to 32.
   final double flagIconSize;
 
@@ -29,8 +32,9 @@ class CountryPickerWidget extends StatefulWidget {
     this.onSelected,
     this.itemTextStyle = _defaultItemTextStyle,
     this.searchInputStyle = _defaultSearchInputStyle,
+    this.searchInputDecoration,
     this.flagIconSize = 32,
-    this.showSeparator = true,
+    this.showSeparator = false,
   }) : super(key: key);
 
   @override
@@ -89,21 +93,22 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
               height: 52,
               child: TextField(
                 style: widget.searchInputStyle,
-                decoration: InputDecoration(
-                    suffixIcon: Visibility(
-                      visible: _controller.text.isNotEmpty,
-                      child: InkWell(
-                        child: Icon(Icons.clear),
-                        onTap: () => setState(() {
-                          _controller.clear();
-                          _filteredList.clear();
-                          _filteredList.addAll(_list);
-                        }),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(),
-                        borderRadius: BorderRadius.circular(30))),
+                decoration: widget.searchInputDecoration ??
+                    InputDecoration(
+                        suffixIcon: Visibility(
+                          visible: _controller.text.isNotEmpty,
+                          child: InkWell(
+                            child: Icon(Icons.clear),
+                            onTap: () => setState(() {
+                              _controller.clear();
+                              _filteredList.clear();
+                              _filteredList.addAll(_list);
+                            }),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(),
+                            borderRadius: BorderRadius.circular(30))),
                 textInputAction: TextInputAction.done,
                 controller: _controller,
                 onChanged: _onSearch,
