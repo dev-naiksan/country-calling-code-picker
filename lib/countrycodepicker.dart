@@ -3,6 +3,7 @@ library countrycodepicker;
 import 'package:flutter/material.dart';
 
 import 'country.dart';
+import 'functions.dart';
 
 class CountryPickerWidget extends StatefulWidget {
   final ValueChanged<Country> onSelected;
@@ -20,7 +21,15 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
 
   @override
   void initState() {
+    loadList();
     super.initState();
+  }
+
+  void loadList() async {
+    _list = await getCountries(context);
+    setState(() {
+      _filteredList = _list.map((e) => e).toList();
+    });
   }
 
   @override
@@ -75,6 +84,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                       children: <Widget>[
                         Image.asset(
                           _filteredList[index].flag,
+                          package: 'country_calling_code_picker',
                           width: 32,
                         ),
                         SizedBox(

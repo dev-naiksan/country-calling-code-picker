@@ -6,7 +6,7 @@ import './country.dart';
 
 Future<List<Country>> getCountries(BuildContext context) async {
   String rawData = await DefaultAssetBundle.of(context)
-      .loadString('assets/raw/country_codes.json');
+      .loadString('packages/country_calling_code_picker/raw/country_codes.json');
   if (rawData == null) {
     return [];
   }
