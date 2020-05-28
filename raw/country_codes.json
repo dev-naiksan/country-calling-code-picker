@@ -182,7 +182,7 @@
   {
     "country_code": "BV",
     "name": "Bouvet Island",
-    "calling_code": "+",
+    "calling_code": "+55",
     "flag": "flags/bvt.png"
   },
   {
@@ -200,7 +200,7 @@
   {
     "country_code": "UM",
     "name": "United States Minor Outlying Islands",
-    "calling_code": "+",
+    "calling_code": "+246",
     "flag": "flags/umi.png"
   },
   {
@@ -482,7 +482,7 @@
   {
     "country_code": "TF",
     "name": "French Southern Territories",
-    "calling_code": "+",
+    "calling_code": "+262",
     "flag": "flags/atf.png"
   },
   {
@@ -590,7 +590,7 @@
   {
     "country_code": "HM",
     "name": "Heard Island and McDonald Islands",
-    "calling_code": "+",
+    "calling_code": "+672",
     "flag": "flags/hmd.png"
   },
   {

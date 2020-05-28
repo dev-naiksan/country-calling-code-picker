@@ -19,6 +19,25 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
   List<Country> _filteredList = new List();
   TextEditingController _controller = new TextEditingController();
 
+  void _onSearch(text) {
+    if (text == null || text.isEmpty) {
+      setState(() {
+        _filteredList.clear();
+        _filteredList.addAll(_list);
+      });
+    } else {
+      setState(() {
+        _filteredList = _list
+            .where((element) =>
+                element.name.toLowerCase().contains(text) ||
+                element.callingCode.toLowerCase().contains(text) ||
+                element.countryCode.toLowerCase().startsWith(text))
+            .map((e) => e)
+            .toList();
+      });
+    }
+  }
+
   @override
   void initState() {
     loadList();
@@ -46,23 +65,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
             child: TextField(
               textInputAction: TextInputAction.done,
               controller: _controller,
-              onChanged: (text) {
-                if (text == null || text.isEmpty) {
-                  setState(() {
-                    _filteredList.addAll(_list);
-                  });
-                } else {
-                  setState(() {
-                    _filteredList = _list
-                        .where((element) =>
-                            element.name.toLowerCase().contains(text) ||
-                            element.callingCode.toLowerCase().contains(text) ||
-                            element.countryCode.toLowerCase().startsWith(text))
-                        .map((e) => e)
-                        .toList();
-                  });
-                }
-              },
+              onChanged: _onSearch,
             ),
           ),
           SizedBox(

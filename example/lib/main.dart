@@ -1,6 +1,5 @@
-import 'package:country_calling_code_picker/country.dart';
+import 'package:country_calling_code_picker/picker.dart';
 import 'package:flutter/material.dart';
-import 'package:country_calling_code_picker/countrycodepicker.dart';
 
 void main() {
   runApp(MyApp());
