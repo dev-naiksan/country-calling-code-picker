@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -31,19 +32,51 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Country Picker'),
+        title: Text('Country Calling Code Picker'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Selected Calling code: ${_selectedCountry?.callingCode}',
+            _selectedCountry == null
+                ? Container()
+                : Column(
+                    children: <Widget>[
+                      Image.asset(
+                        _selectedCountry.flag,
+                        package: countryCodePackageName,
+                        width: 100,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        _selectedCountry == null
+                            ? ''
+                            : '${_selectedCountry?.callingCode ?? '+code'} ${_selectedCountry?.name ?? 'Name'} (${_selectedCountry?.countryCode ?? 'Country code'})',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ],
+                  ),
+            SizedBox(
+              height: 100,
             ),
-            FlatButton(
-              child: Text('Select Country Code'),
+            RaisedButton(
+              child: Text('Select Country using full screen'),
+              color: Colors.amber,
               onPressed: _onPressed,
-            )
+            ),
+            RaisedButton(
+              child: Text('Select Country using bottom sheet'),
+              color: Colors.orange,
+              onPressed: _onPressedShowBottomSheet,
+            ),
+            RaisedButton(
+              child: Text('Select Country using dialog'),
+              color: Colors.deepOrangeAccent,
+              onPressed: _onPressedShowDialog,
+            ),
           ],
         ),
       ),
@@ -55,6 +88,28 @@ class _MyHomePageState extends State<MyHomePage> {
         await Navigator.push(context, new MaterialPageRoute(builder: (context) {
       return PickerPage();
     }));
+    if (country != null) {
+      setState(() {
+        _selectedCountry = country;
+      });
+    }
+  }
+
+  void _onPressedShowBottomSheet() async {
+    final country = await showCountryPickerSheet(
+      context,
+    );
+    if (country != null) {
+      setState(() {
+        _selectedCountry = country;
+      });
+    }
+  }
+
+  void _onPressedShowDialog() async {
+    final country = await showCountryPickerDialog(
+      context,
+    );
     if (country != null) {
       setState(() {
         _selectedCountry = country;

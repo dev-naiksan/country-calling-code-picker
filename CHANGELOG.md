@@ -1,4 +1,8 @@
-## [v1.0.0] - 29-05-2020
+## [v1.0.2] - 29-05-2020
+ *Added Utility functions: 1. showCountryPickerDialog & 2. showCountryPickerSheet
+ *Fixes and improvements.
+ 
+## [v1.0.1] - 29-05-2020
  *Added an option to add decoration for Search Box
  *Other improvements.
 

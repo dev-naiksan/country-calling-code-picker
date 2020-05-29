@@ -1,12 +1,14 @@
 library countrycodepicker;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
 
 import 'country.dart';
 import 'functions.dart';
 
 const TextStyle _defaultItemTextStyle = const TextStyle(fontSize: 16);
 const TextStyle _defaultSearchInputStyle = const TextStyle(fontSize: 16);
+const String countryCodePackageName = 'country_calling_code_picker';
 
 class CountryPickerWidget extends StatefulWidget {
   /// This callback will be called on selection of a [Country].
@@ -27,6 +29,9 @@ class CountryPickerWidget extends StatefulWidget {
   ///Can be set to `true` for showing the List Separator. Default set to `false`
   final bool showSeparator;
 
+  ///Can be set to `true` for opening the keyboard automatically. Default set to `false`
+  final bool focusSearchBox;
+
   const CountryPickerWidget({
     Key key,
     this.onSelected,
@@ -35,7 +40,11 @@ class CountryPickerWidget extends StatefulWidget {
     this.searchInputDecoration,
     this.flagIconSize = 32,
     this.showSeparator = false,
-  }) : super(key: key);
+    this.focusSearchBox = false,
+  })  : assert(flagIconSize != null &&
+            showSeparator != null &&
+            focusSearchBox != null),
+        super(key: key);
 
   @override
   _CountryPickerWidgetState createState() => _CountryPickerWidgetState();
@@ -45,6 +54,9 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
   List<Country> _list = new List();
   List<Country> _filteredList = new List();
   TextEditingController _controller = new TextEditingController();
+  ScrollController _scrollController = new ScrollController();
+  bool _isLoading = false;
+  Country _currentCountry;
 
   void _onSearch(text) {
     if (text == null || text.isEmpty) {
@@ -56,9 +68,15 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
       setState(() {
         _filteredList = _list
             .where((element) =>
-                element.name.toLowerCase().contains(text) ||
-                element.callingCode.toLowerCase().contains(text) ||
-                element.countryCode.toLowerCase().startsWith(text))
+                element.name
+                    .toLowerCase()
+                    .contains(text.toString().toLowerCase()) ||
+                element.callingCode
+                    .toLowerCase()
+                    .contains(text.toString().toLowerCase()) ||
+                element.countryCode
+                    .toLowerCase()
+                    .startsWith(text.toString().toLowerCase()))
             .map((e) => e)
             .toList();
       });
@@ -67,95 +85,122 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
 
   @override
   void initState() {
+    _scrollController.addListener(() {
+      FocusScopeNode currentFocus = FocusScope.of(context);
+      if (!currentFocus.hasPrimaryFocus) {
+        currentFocus.unfocus();
+      }
+    });
     loadList();
     super.initState();
   }
 
   void loadList() async {
-    _list = await Utils.getCountries(context);
+    final code = await FlutterSimCountryCode.simCountryCode;
+    setState(() {
+      _isLoading = true;
+    });
+    _list = await getCountries(context);
+    _currentCountry = _list.firstWhere((element) => element.countryCode == code,
+        orElse: () => null);
+    if (_currentCountry != null) {
+      _list.removeWhere(
+          (element) => element.callingCode == _currentCountry.callingCode);
+      _list.insert(0, _currentCountry);
+    }
     setState(() {
       _filteredList = _list.map((e) => e).toList();
+      _isLoading = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.9,
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 16,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 24, right: 24),
-            child: SizedBox(
-              height: 52,
-              child: TextField(
-                style: widget.searchInputStyle,
-                decoration: widget.searchInputDecoration ??
-                    InputDecoration(
-                        suffixIcon: Visibility(
-                          visible: _controller.text.isNotEmpty,
-                          child: InkWell(
-                            child: Icon(Icons.clear),
-                            onTap: () => setState(() {
-                              _controller.clear();
-                              _filteredList.clear();
-                              _filteredList.addAll(_list);
-                            }),
-                          ),
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 16,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 24, right: 24),
+          child: SizedBox(
+            height: 52,
+            child: TextField(
+              style: widget.searchInputStyle,
+              autofocus: widget.focusSearchBox ?? false,
+              decoration: widget.searchInputDecoration ??
+                  InputDecoration(
+                      suffixIcon: Visibility(
+                        visible: _controller.text.isNotEmpty,
+                        child: InkWell(
+                          child: Icon(Icons.clear),
+                          onTap: () => setState(() {
+                            _controller.clear();
+                            _filteredList.clear();
+                            _filteredList.addAll(_list);
+                          }),
                         ),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(),
-                            borderRadius: BorderRadius.circular(30))),
-                textInputAction: TextInputAction.done,
-                controller: _controller,
-                onChanged: _onSearch,
-              ),
+                      ),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(),
+                          borderRadius: BorderRadius.circular(30)),
+                      hintText: 'Search country name, code'),
+              textInputAction: TextInputAction.done,
+              controller: _controller,
+              onChanged: _onSearch,
             ),
           ),
-          SizedBox(
-            height: 16,
-          ),
-          Expanded(
-            child: ListView.separated(
-              padding: EdgeInsets.only(top: 16),
-              itemCount: _filteredList.length,
-              separatorBuilder: (_, index) =>
-                  widget.showSeparator ? Divider() : Container(),
-              itemBuilder: (_, index) {
-                return InkWell(
-                  onTap: () {
-                    widget.onSelected(_filteredList[index]);
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Expanded(
+          child: _isLoading
+              ? Center(child: CircularProgressIndicator())
+              : ListView.separated(
+                  padding: EdgeInsets.only(top: 16),
+                  controller: _scrollController,
+                  itemCount: _filteredList.length,
+                  separatorBuilder: (_, index) =>
+                      widget.showSeparator ? Divider() : Container(),
+                  itemBuilder: (_, index) {
+                    return InkWell(
+                      onTap: () {
+                        widget.onSelected?.call(_filteredList[index]);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            bottom: 12, top: 12, left: 24, right: 24),
+                        child: Row(
+                          children: <Widget>[
+                            Image.asset(
+                              _filteredList[index].flag,
+                              package: countryCodePackageName,
+                              width: widget.flagIconSize,
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Expanded(
+                                child: Text(
+                              '${_filteredList[index].callingCode} ${_filteredList[index].name}',
+                              style: widget.itemTextStyle,
+                            )),
+                          ],
+                        ),
+                      ),
+                    );
                   },
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: 12, top: 12, left: 24, right: 24),
-                    child: Row(
-                      children: <Widget>[
-                        Image.asset(
-                          _filteredList[index].flag,
-                          package: 'country_calling_code_picker',
-                          width: widget.flagIconSize,
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        Expanded(
-                            child: Text(
-                          '${_filteredList[index].callingCode} ${_filteredList[index].name}',
-                          style: widget.itemTextStyle,
-                        )),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          )
-        ],
-      ),
+                ),
+        )
+      ],
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _controller.dispose();
+    super.dispose();
   }
 }
