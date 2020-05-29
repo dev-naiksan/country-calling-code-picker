@@ -1,6 +1,6 @@
 # Country Calling Code Picker
 
-Searchable country picker widget ready to user in a dialog, bottom sheet and even in full screen!
+Searchable country picker widget ready to use in a dialog, bottom sheet and even in full screen!
 <img src="https://user-images.githubusercontent.com/65971744/83264373-9782d680-a1dd-11ea-88f2-cebe687da65a.png" width="240"/>
 
 1: Import the plugin using
