@@ -96,22 +96,26 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
   }
 
   void loadList() async {
-    final code = await FlutterSimCountryCode.simCountryCode;
     setState(() {
       _isLoading = true;
     });
     _list = await getCountries(context);
-    _currentCountry = _list.firstWhere((element) => element.countryCode == code,
-        orElse: () => null);
-    if (_currentCountry != null) {
-      _list.removeWhere(
-          (element) => element.callingCode == _currentCountry.callingCode);
-      _list.insert(0, _currentCountry);
+    try {
+      String code = await FlutterSimCountryCode.simCountryCode;
+      _currentCountry = _list.firstWhere(
+          (element) => element.countryCode == code,
+          orElse: () => null);
+      if (_currentCountry != null) {
+        _list.removeWhere(
+            (element) => element.callingCode == _currentCountry.callingCode);
+        _list.insert(0, _currentCountry);
+      }
+    } catch (e) {} finally {
+      setState(() {
+        _filteredList = _list.map((e) => e).toList();
+        _isLoading = false;
+      });
     }
-    setState(() {
-      _filteredList = _list.map((e) => e).toList();
-      _isLoading = false;
-    });
   }
 
   @override

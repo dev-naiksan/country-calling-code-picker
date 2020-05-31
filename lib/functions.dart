@@ -18,6 +18,7 @@ Future<List<Country>> getCountries(BuildContext context) async {
 
 Future<Country> showCountryPickerSheet(BuildContext context,
     {Widget title,
+    Widget cancelWidget,
     double cornerRadius: 35,
     bool focusSearchBox: false,
     double heightFactor: 0.9}) {
@@ -40,14 +41,15 @@ Future<Country> showCountryPickerSheet(BuildContext context,
               SizedBox(height: 16),
               Stack(
                 children: <Widget>[
-                  Positioned(
-                    right: 8,
-                    top: 4,
-                    bottom: 0,
-                    child: FlatButton(
-                        child: Text('Cancel'),
-                        onPressed: () => Navigator.pop(context)),
-                  ),
+                  cancelWidget ??
+                      Positioned(
+                        right: 8,
+                        top: 4,
+                        bottom: 0,
+                        child: FlatButton(
+                            child: Text('Cancel'),
+                            onPressed: () => Navigator.pop(context)),
+                      ),
                   Center(
                     child: title ??
                         Text(
