@@ -29,6 +29,19 @@ class _MyHomePageState extends State<MyHomePage> {
   Country _selectedCountry;
 
   @override
+  void initState() {
+    initCountry();
+    super.initState();
+  }
+
+  void initCountry() async {
+    final country = await getDefaultCountry(context);
+    setState(() {
+      _selectedCountry = country;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

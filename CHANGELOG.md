@@ -1,3 +1,10 @@
+## [v1.0.4] - 01-06-2020
+ *Added Utility functions: getDefaultCountry which return user's current country using its SIM country code.
+ *Fixes and improvements.
+
+## [v1.0.3] - 31-05-2020
+*Added fix for sim card exception
+
 ## [v1.0.2] - 29-05-2020
  *Added Utility functions: 1. showCountryPickerDialog & 2. showCountryPickerSheet
  *Fixes and improvements.
