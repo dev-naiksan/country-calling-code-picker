@@ -1,3 +1,6 @@
+## [v1.0.6] - 03-06-2020
+ *Added function to get country by country code.
+
 ## [v1.0.5] - 03-06-2020
  *Fixed Default country null issue.
  

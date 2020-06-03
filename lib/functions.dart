@@ -34,6 +34,14 @@ Future<Country> getDefaultCountry(BuildContext context) async {
   return currentCountry;
 }
 
+///This function returns an country whose [countryCode] matches with the passed one.
+Future<Country> getCountryByCountryCode(
+    BuildContext context, String countryCode) async {
+  final list = await getCountries(context);
+  return list.firstWhere((element) => element.countryCode == countryCode,
+      orElse: () => null);
+}
+
 Future<Country> showCountryPickerSheet(BuildContext context,
     {Widget title,
     Widget cancelWidget,
