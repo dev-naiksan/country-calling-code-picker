@@ -1,4 +1,7 @@
 ## [v1.0.4] - 01-06-2020
+ *Fixed Default country null issue.
+ 
+## [v1.0.4] - 01-06-2020
  *Added Utility functions: getDefaultCountry which return user's current country using its SIM country code.
  *Fixes and improvements.
 
