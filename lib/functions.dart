@@ -22,13 +22,16 @@ Future<List<Country>> getCountries(BuildContext context) async {
 ///If there is no sim in the device, first country in the list will be returned.
 Future<Country> getDefaultCountry(BuildContext context) async {
   final list = await getCountries(context);
+  var currentCountry;
   try {
     final countryCode = await FlutterSimCountryCode.simCountryCode;
-    return list.firstWhere((element) => element.countryCode == countryCode,
+    currentCountry = list.firstWhere(
+        (element) => element.countryCode == countryCode,
         orElse: () => null);
   } catch (e) {
-    return list.first;
+    currentCountry = list.first;
   }
+  return currentCountry;
 }
 
 Future<Country> showCountryPickerSheet(BuildContext context,
