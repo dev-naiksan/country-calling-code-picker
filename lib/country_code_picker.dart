@@ -127,32 +127,31 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 24, right: 24),
-          child: SizedBox(
-            height: 52,
-            child: TextField(
-              style: widget.searchInputStyle,
-              autofocus: widget.focusSearchBox ?? false,
-              decoration: widget.searchInputDecoration ??
-                  InputDecoration(
-                      suffixIcon: Visibility(
-                        visible: _controller.text.isNotEmpty,
-                        child: InkWell(
-                          child: Icon(Icons.clear),
-                          onTap: () => setState(() {
-                            _controller.clear();
-                            _filteredList.clear();
-                            _filteredList.addAll(_list);
-                          }),
-                        ),
+          child: TextField(
+            style: widget.searchInputStyle,
+            autofocus: widget.focusSearchBox ?? false,
+            decoration: widget.searchInputDecoration ??
+                InputDecoration(
+                    suffixIcon: Visibility(
+                      visible: _controller.text.isNotEmpty,
+                      child: InkWell(
+                        child: Icon(Icons.clear),
+                        onTap: () => setState(() {
+                          _controller.clear();
+                          _filteredList.clear();
+                          _filteredList.addAll(_list);
+                        }),
                       ),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(),
-                          borderRadius: BorderRadius.circular(30)),
-                      hintText: 'Search country name, code'),
-              textInputAction: TextInputAction.done,
-              controller: _controller,
-              onChanged: _onSearch,
-            ),
+                    ),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(),
+                        borderRadius: BorderRadius.circular(30)),
+                    contentPadding:
+                        EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                    hintText: 'Search country name, code'),
+            textInputAction: TextInputAction.done,
+            controller: _controller,
+            onChanged: _onSearch,
           ),
         ),
         SizedBox(

@@ -1,3 +1,6 @@
+## [v1.0.7] - 04-06-2020
+ *Fixed text alignment in search field
+
 ## [v1.0.6] - 03-06-2020
  *Added function to get country by country code.
 

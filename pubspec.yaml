@@ -1,6 +1,6 @@
 name: country_calling_code_picker
 description: Flexible Country picker for getting Country code and Calling code.
-version: 1.0.6
+version: 1.0.7
 homepage: https://github.com/dev-naiksan/country-calling-code-picker.git
 
 environment:
