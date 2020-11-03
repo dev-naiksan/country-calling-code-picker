@@ -71,3 +71,8 @@ class PickerPage extends StatelessWidget {
 ```dart
 List<Country> list = await getCountries(context);
 ```
+7. If you want to get flag from the country code, you can use below method to get country using the country code.
+Eg. for getting India's flag,
+```dart
+Country country = await getCountryByCountryCode(context, 'IN');
+```
