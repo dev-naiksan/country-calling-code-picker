@@ -8,6 +8,7 @@ import 'functions.dart';
 
 const TextStyle _defaultItemTextStyle = const TextStyle(fontSize: 16);
 const TextStyle _defaultSearchInputStyle = const TextStyle(fontSize: 16);
+const String _kDefaultSearchHintText = 'Search country name, code';
 const String countryCodePackageName = 'country_calling_code_picker';
 
 class CountryPickerWidget extends StatefulWidget {
@@ -32,12 +33,16 @@ class CountryPickerWidget extends StatefulWidget {
   ///Can be set to `true` for opening the keyboard automatically. Default set to `false`
   final bool focusSearchBox;
 
+  ///This will change the hint of the search box. Alternatively [searchInputDecoration] can be used to change decoration fully.
+  final String searchHintText;
+
   const CountryPickerWidget({
     Key key,
     this.onSelected,
     this.itemTextStyle = _defaultItemTextStyle,
     this.searchInputStyle = _defaultSearchInputStyle,
     this.searchInputDecoration,
+    this.searchHintText = _kDefaultSearchHintText,
     this.flagIconSize = 32,
     this.showSeparator = false,
     this.focusSearchBox = false,
@@ -132,23 +137,25 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
             autofocus: widget.focusSearchBox ?? false,
             decoration: widget.searchInputDecoration ??
                 InputDecoration(
-                    suffixIcon: Visibility(
-                      visible: _controller.text.isNotEmpty,
-                      child: InkWell(
-                        child: Icon(Icons.clear),
-                        onTap: () => setState(() {
-                          _controller.clear();
-                          _filteredList.clear();
-                          _filteredList.addAll(_list);
-                        }),
-                      ),
+                  suffixIcon: Visibility(
+                    visible: _controller.text.isNotEmpty,
+                    child: InkWell(
+                      child: Icon(Icons.clear),
+                      onTap: () => setState(() {
+                        _controller.clear();
+                        _filteredList.clear();
+                        _filteredList.addAll(_list);
+                      }),
                     ),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(),
-                        borderRadius: BorderRadius.circular(30)),
-                    contentPadding:
-                        EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-                    hintText: 'Search country name, code'),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  contentPadding:
+                      EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                  hintText: widget.searchHintText,
+                ),
             textInputAction: TextInputAction.done,
             controller: _controller,
             onChanged: _onSearch,

@@ -1,3 +1,6 @@
+## [v1.0.8] - 03-11-2020
+ *Added option to change search bar hint.
+
 ## [v1.0.7] - 04-06-2020
  *Fixed text alignment in search field
 
