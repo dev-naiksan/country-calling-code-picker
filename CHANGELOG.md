@@ -1,3 +1,6 @@
+## [v2.0.0] - 10-07-2021
+ *Migrated to null safety
+
 ## [v1.0.8] - 03-11-2020
  *Added option to change search bar hint.
 
