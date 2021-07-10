@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Country _selectedCountry;
+  Country? _selectedCountry;
 
   @override
   void initState() {
@@ -43,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final country = _selectedCountry;
     return Scaffold(
       appBar: AppBar(
         title: Text('Country Calling Code Picker'),
@@ -51,12 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _selectedCountry == null
+            country == null
                 ? Container()
                 : Column(
                     children: <Widget>[
                       Image.asset(
-                        _selectedCountry.flag,
+                        country.flag,
                         package: countryCodePackageName,
                         width: 100,
                       ),
@@ -64,9 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 16,
                       ),
                       Text(
-                        _selectedCountry == null
-                            ? ''
-                            : '${_selectedCountry?.callingCode ?? '+code'} ${_selectedCountry?.name ?? 'Name'} (${_selectedCountry?.countryCode ?? 'Country code'})',
+                        '${country.callingCode} ${country.name} (${country.countryCode})',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 24),
                       ),
@@ -75,17 +74,19 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 100,
             ),
-            RaisedButton(
+            MaterialButton(
               child: Text('Select Country using full screen'),
               color: Colors.amber,
               onPressed: _onPressed,
             ),
-            RaisedButton(
+            SizedBox(height: 24,),
+            MaterialButton(
               child: Text('Select Country using bottom sheet'),
               color: Colors.orange,
               onPressed: _onPressedShowBottomSheet,
             ),
-            RaisedButton(
+            SizedBox(height: 24,),
+            MaterialButton(
               child: Text('Select Country using dialog'),
               color: Colors.deepOrangeAccent,
               onPressed: _onPressedShowDialog,

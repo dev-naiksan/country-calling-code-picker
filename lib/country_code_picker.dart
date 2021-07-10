@@ -13,7 +13,7 @@ const String countryCodePackageName = 'country_calling_code_picker';
 
 class CountryPickerWidget extends StatefulWidget {
   /// This callback will be called on selection of a [Country].
-  final ValueChanged<Country> onSelected;
+  final ValueChanged<Country>? onSelected;
 
   /// [itemTextStyle] can be used to change the TextStyle of the Text in ListItem. Default is [_defaultItemTextStyle]
   final TextStyle itemTextStyle;
@@ -22,7 +22,7 @@ class CountryPickerWidget extends StatefulWidget {
   final TextStyle searchInputStyle;
 
   /// [searchInputDecoration] can be used to change the decoration for SearchBox.
-  final InputDecoration searchInputDecoration;
+  final InputDecoration? searchInputDecoration;
 
   /// Flag icon size (width). Default set to 32.
   final double flagIconSize;
@@ -37,7 +37,7 @@ class CountryPickerWidget extends StatefulWidget {
   final String searchHintText;
 
   const CountryPickerWidget({
-    Key key,
+    Key? key,
     this.onSelected,
     this.itemTextStyle = _defaultItemTextStyle,
     this.searchInputStyle = _defaultSearchInputStyle,
@@ -46,22 +46,19 @@ class CountryPickerWidget extends StatefulWidget {
     this.flagIconSize = 32,
     this.showSeparator = false,
     this.focusSearchBox = false,
-  })  : assert(flagIconSize != null &&
-            showSeparator != null &&
-            focusSearchBox != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   _CountryPickerWidgetState createState() => _CountryPickerWidgetState();
 }
 
 class _CountryPickerWidgetState extends State<CountryPickerWidget> {
-  List<Country> _list = new List();
-  List<Country> _filteredList = new List();
+  List<Country> _list = [];
+  List<Country> _filteredList = [];
   TextEditingController _controller = new TextEditingController();
   ScrollController _scrollController = new ScrollController();
   bool _isLoading = false;
-  Country _currentCountry;
+  Country? _currentCountry;
 
   void _onSearch(text) {
     if (text == null || text.isEmpty) {
@@ -106,14 +103,14 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
     });
     _list = await getCountries(context);
     try {
-      String code = await FlutterSimCountryCode.simCountryCode;
-      _currentCountry = _list.firstWhere(
-          (element) => element.countryCode == code,
-          orElse: () => null);
-      if (_currentCountry != null) {
+      String? code = await FlutterSimCountryCode.simCountryCode;
+      _currentCountry =
+          _list.firstWhere((element) => element.countryCode == code);
+      final country = _currentCountry;
+      if (country != null) {
         _list.removeWhere(
-            (element) => element.callingCode == _currentCountry.callingCode);
-        _list.insert(0, _currentCountry);
+            (element) => element.callingCode == country.callingCode);
+        _list.insert(0, country);
       }
     } catch (e) {} finally {
       setState(() {
@@ -134,7 +131,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
           padding: const EdgeInsets.only(left: 24, right: 24),
           child: TextField(
             style: widget.searchInputStyle,
-            autofocus: widget.focusSearchBox ?? false,
+            autofocus: widget.focusSearchBox,
             decoration: widget.searchInputDecoration ??
                 InputDecoration(
                   suffixIcon: Visibility(

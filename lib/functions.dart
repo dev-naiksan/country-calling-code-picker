@@ -11,9 +11,6 @@ import './country.dart';
 Future<List<Country>> getCountries(BuildContext context) async {
   String rawData = await DefaultAssetBundle.of(context).loadString(
       'packages/country_calling_code_picker/raw/country_codes.json');
-  if (rawData == null) {
-    return [];
-  }
   final parsed = json.decode(rawData.toString()).cast<Map<String, dynamic>>();
   return parsed.map<Country>((json) => new Country.fromJson(json)).toList();
 }
@@ -25,9 +22,8 @@ Future<Country> getDefaultCountry(BuildContext context) async {
   var currentCountry;
   try {
     final countryCode = await FlutterSimCountryCode.simCountryCode;
-    currentCountry = list.firstWhere(
-        (element) => element.countryCode == countryCode,
-        orElse: () => null);
+    currentCountry =
+        list.firstWhere((element) => element.countryCode == countryCode);
   } catch (e) {
     currentCountry = list.first;
   }
@@ -35,24 +31,21 @@ Future<Country> getDefaultCountry(BuildContext context) async {
 }
 
 ///This function returns an country whose [countryCode] matches with the passed one.
-Future<Country> getCountryByCountryCode(
+Future<Country?> getCountryByCountryCode(
     BuildContext context, String countryCode) async {
   final list = await getCountries(context);
-  return list.firstWhere((element) => element.countryCode == countryCode,
-      orElse: () => null);
+  return list.firstWhere((element) => element.countryCode == countryCode);
 }
 
-Future<Country> showCountryPickerSheet(BuildContext context,
-    {Widget title,
-    Widget cancelWidget,
+Future<Country?> showCountryPickerSheet(BuildContext context,
+    {Widget? title,
+    Widget? cancelWidget,
     double cornerRadius: 35,
     bool focusSearchBox: false,
     double heightFactor: 0.9}) {
-  assert(cornerRadius != null, 'cornerRadius cannot be null');
-  assert(focusSearchBox != null, 'focusSearchBox cannot be null');
   assert(heightFactor <= 0.9 && heightFactor >= 0.4,
       'heightFactor must be between 0.4 and 0.9');
-  return showModalBottomSheet<Country>(
+  return showModalBottomSheet<Country?>(
       context: context,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
@@ -72,7 +65,7 @@ Future<Country> showCountryPickerSheet(BuildContext context,
                         right: 8,
                         top: 4,
                         bottom: 0,
-                        child: FlatButton(
+                        child: TextButton(
                             child: Text('Cancel'),
                             onPressed: () => Navigator.pop(context)),
                       ),
@@ -101,16 +94,13 @@ Future<Country> showCountryPickerSheet(BuildContext context,
       });
 }
 
-Future<Country> showCountryPickerDialog(
+Future<Country?> showCountryPickerDialog(
   BuildContext context, {
-  Widget title,
+  Widget? title,
   double cornerRadius: 35,
   bool focusSearchBox: false,
 }) {
-  assert(cornerRadius != null, 'cornerRadius cannot be null');
-  assert(focusSearchBox != null, 'focusSearchBox cannot be null');
-
-  return showDialog<Country>(
+  return showDialog<Country?>(
       context: context,
       barrierDismissible: true,
       builder: (_) => Dialog(
@@ -127,7 +117,7 @@ Future<Country> showCountryPickerDialog(
                       right: 8,
                       top: 4,
                       bottom: 0,
-                      child: FlatButton(
+                      child: TextButton(
                           child: Text('Cancel'),
                           onPressed: () => Navigator.pop(context)),
                     ),

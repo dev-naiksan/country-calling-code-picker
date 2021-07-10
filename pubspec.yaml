@@ -4,12 +4,12 @@ version: 1.0.8
 homepage: https://github.com/dev-naiksan/country-calling-code-picker.git
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_sim_country_code: ^0.0.3
+  flutter_sim_country_code: ^0.1.1
 
 
 dev_dependencies:
