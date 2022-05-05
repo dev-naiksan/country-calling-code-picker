@@ -17,17 +17,20 @@ Future<List<Country>> getCountries(BuildContext context) async {
 
 ///This function returns an user's current country. User's sim country code is matched with the ones in the list.
 ///If there is no sim in the device, first country in the list will be returned.
+///This function returns an user's current country. User's sim country code is matched with the ones in the list.
+///If there is no sim in the device, first country in the list will be returned.
 Future<Country> getDefaultCountry(BuildContext context) async {
   final list = await getCountries(context);
-  var currentCountry;
   try {
     final countryCode = await FlutterSimCountryCode.simCountryCode;
-    currentCountry =
-        list.firstWhere((element) => element.countryCode == countryCode);
+    if (countryCode == null) {
+      return list.first;
+    }
+    return list.firstWhere((element) =>
+        element.countryCode.toLowerCase() == countryCode.toLowerCase());
   } catch (e) {
-    currentCountry = list.first;
+    return list.first;
   }
-  return currentCountry;
 }
 
 ///This function returns an country whose [countryCode] matches with the passed one.
