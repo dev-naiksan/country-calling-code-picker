@@ -1,3 +1,6 @@
+## [v2.0.1] - 05-05-2022
+ *Fixed deafult country selection issue
+
 ## [v2.0.0] - 10-07-2021
  *Migrated to null safety
 
