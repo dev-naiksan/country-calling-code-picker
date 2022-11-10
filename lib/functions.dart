@@ -118,7 +118,7 @@ Future<Country?> showCountryPickerDialog(
                   children: <Widget>[
                     Positioned(
                       right: 8,
-                      top: 4,
+                      top: 1,
                       bottom: 0,
                       child: TextButton(
                           child: Text('Cancel'),
