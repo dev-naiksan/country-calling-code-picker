@@ -158,8 +158,8 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                     prefixIcon: Padding(
                       padding: const EdgeInsetsDirectional.only(start: 12.0),
                       child: InkWell(
-                        child:  SvgPicture.asset(
-                          'assets/flags/search.svg',
+                        child: Image.asset(
+                          'assests/search.png',
                         ),
                       ),
                     ),
