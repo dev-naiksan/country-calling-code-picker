@@ -179,11 +179,11 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
         SizedBox(
           height: 16,
         ),
-        Scrollbar(
-          child: Expanded(
-            child: _isLoading
-                ? Center(child: CircularProgressIndicator())
-                : ListView.separated(
+        Expanded(
+          child: _isLoading
+              ? Center(child: CircularProgressIndicator())
+              : Scrollbar(
+                  child: ListView.separated(
                     padding: EdgeInsets.only(top: 16),
                     controller: _scrollController,
                     itemCount: _filteredList.length,
@@ -229,7 +229,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                       );
                     },
                   ),
-          ),
+                ),
         ),
       ],
     );
