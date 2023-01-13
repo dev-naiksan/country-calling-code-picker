@@ -182,12 +182,13 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
         Expanded(
           child: _isLoading
               ? Center(child: CircularProgressIndicator())
-              : RawScrollbar(
-                  thumbColor: Color(0xFF522583),
-                  thickness: 11,
-                  radius: Radius.circular(5),
-                  // showTrackOnHover: true,
-                  isAlwaysShown: true,
+              : SingleChildScrollView(
+
+                  // thumbColor: Color(0xFF522583),
+                  // thickness: 8,
+                  // radius: Radius.circular(5),
+                  // // showTrackOnHover: true,
+                  // isAlwaysShown: true,
                   child: ListView.separated(
                     padding: EdgeInsets.only(top: 16),
                     controller: _scrollController,
