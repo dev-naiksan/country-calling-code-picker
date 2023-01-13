@@ -2,6 +2,7 @@ library countrycodepicker;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'country.dart';
 import 'functions.dart';
@@ -157,13 +158,18 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                     prefixIcon: Padding(
                       padding: const EdgeInsetsDirectional.only(start: 12.0),
                       child: InkWell(
-                        child: Icon(Icons.search),
+                        child:  SvgPicture.asset(
+                          'assets/search.svg',
+                          height: 20.0,
+                          width: 20.0,
+                          allowDrawingOutsideViewBox: true,
+                        ),
                       ),
                     ),
                     prefixIconColor: Color(0xff522583),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(),
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(23),
                     ),
                     contentPadding:
                         EdgeInsets.only(left: 20, right: 16, top: 8, bottom: 8),

@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_sim_country_code: ^0.1.1
+  flutter_svg: ^1.0.0
+
 
 
 dev_dependencies:
