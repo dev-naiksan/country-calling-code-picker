@@ -159,10 +159,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                       padding: const EdgeInsetsDirectional.only(start: 12.0),
                       child: InkWell(
                         child:  SvgPicture.asset(
-                          'assets/search.svg',
-                          height: 20.0,
-                          width: 20.0,
-                          allowDrawingOutsideViewBox: true,
+                          'assets/flags/search.svg',
                         ),
                       ),
                     ),
