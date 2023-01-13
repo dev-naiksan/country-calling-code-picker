@@ -19,8 +19,11 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-  uses-material-design: true
   assets:
     - assets/
+    - assets/icons/
     - flags/
     - raw/
+  uses-material-design: true
+
+
