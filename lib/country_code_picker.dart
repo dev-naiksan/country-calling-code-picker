@@ -157,9 +157,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                     ),
                     prefixIcon: Padding(
                       padding: const EdgeInsetsDirectional.only(start: 12.0),
-                      child: SvgPicture.asset(
-                        'assets/icons/search.svg',
-                      ),
+                      child:Image.asset('icons/search.png', width:18, height:18)
                     ),
                     prefixIconColor: Color(0xff522583),
                     border: OutlineInputBorder(
@@ -185,7 +183,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
               : Padding(
                   padding: const EdgeInsetsDirectional.only(end: 25.0),
                   child: RawScrollbar(
-                    minThumbLength:100.00,
+                    minThumbLength:60.00,
                     trackColor: Color(0xffCACACA),
                     thickness: 5,
                     radius: Radius.circular(5),
