@@ -20,7 +20,8 @@ dev_dependencies:
 
 flutter:
   assets:
-    - icons/
+    - assets/
+    - assets/icons/
     - flags/
     - raw/
   uses-material-design: true
