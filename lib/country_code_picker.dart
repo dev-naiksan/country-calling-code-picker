@@ -70,15 +70,15 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
       setState(() {
         _filteredList = _list
             .where((element) =>
-        element.name
-            .toLowerCase()
-            .contains(text.toString().toLowerCase()) ||
-            element.callingCode
-                .toLowerCase()
-                .contains(text.toString().toLowerCase()) ||
-            element.countryCode
-                .toLowerCase()
-                .startsWith(text.toString().toLowerCase()))
+                element.name
+                    .toLowerCase()
+                    .contains(text.toString().toLowerCase()) ||
+                element.callingCode
+                    .toLowerCase()
+                    .contains(text.toString().toLowerCase()) ||
+                element.countryCode
+                    .toLowerCase()
+                    .startsWith(text.toString().toLowerCase()))
             .map((e) => e)
             .toList();
       });
@@ -109,10 +109,11 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
       final country = _currentCountry;
       if (country != null) {
         _list.removeWhere(
-                (element) => element.callingCode == country.callingCode);
+            (element) => element.callingCode == country.callingCode);
         _list.insert(0, country);
       }
-    } catch (e) {} finally {
+    } catch (e) {
+    } finally {
       setState(() {
         _filteredList = _list.map((e) => e).toList();
         _isLoading = false;
@@ -129,33 +130,48 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 24, right: 24),
-          child: TextField(
-            style: widget.searchInputStyle,
-            autofocus: widget.focusSearchBox,
-            decoration: widget.searchInputDecoration ??
-                InputDecoration(
-                  suffixIcon: Visibility(
-                    visible: _controller.text.isNotEmpty,
-                    child: InkWell(
-                      child: Icon(Icons.clear),
-                      onTap: () => setState(() {
-                        _controller.clear();
-                        _filteredList.clear();
-                        _filteredList.addAll(_list);
-                      }),
+          child: Container(
+            decoration: BoxDecoration(boxShadow: [
+              new BoxShadow(
+                color: Colors.white70,
+                blurRadius:
+                    5.0, // You can set this blurRadius as per your requirement
+              ),
+            ]),
+            child: TextField(
+              style: widget.searchInputStyle,
+              autofocus: widget.focusSearchBox,
+              decoration: widget.searchInputDecoration ??
+                  InputDecoration(
+                    suffixIcon: Visibility(
+                      visible: _controller.text.isNotEmpty,
+                      child: InkWell(
+                        child: Icon(Icons.clear),
+                        onTap: () => setState(() {
+                          _controller.clear();
+                          _filteredList.clear();
+                          _filteredList.addAll(_list);
+                        }),
+                      ),
                     ),
+                    prefixIcon: Visibility(
+                      visible: _controller.text.isEmpty,
+                      child: InkWell(
+                        child: Icon(Icons.search),
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    contentPadding:
+                        EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                    hintText:'Search',
                   ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  contentPadding:
-                  EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-                  hintText: widget.searchHintText,
-                ),
-            textInputAction: TextInputAction.done,
-            controller: _controller,
-            onChanged: _onSearch,
+              textInputAction: TextInputAction.done,
+              controller: _controller,
+              onChanged: _onSearch,
+            ),
           ),
         ),
         SizedBox(
@@ -165,50 +181,50 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
           child: _isLoading
               ? Center(child: CircularProgressIndicator())
               : ListView.separated(
-            padding: EdgeInsets.only(top: 16),
-            controller: _scrollController,
-            itemCount: _filteredList.length,
-            separatorBuilder: (_, index) =>
-            widget.showSeparator ? Divider() : Container(),
-            itemBuilder: (_, index) {
-              return InkWell(
-                onTap: () {
-                  widget.onSelected?.call(_filteredList[index]);
-                },
-                child: Container(
-                  padding: EdgeInsets.only(
-                      bottom: 12, top: 12, left: 48, right: 48),
-                  child:
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Image.asset(
-                        _filteredList[index].flag,
-                        package: countryCodePackageName,
-                        width: widget.flagIconSize,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        '${_filteredList[index].name} (${_filteredList[index].countryCode})',
-                        style: TextStyle(color: Color(0xFF522583)),
-
-                      ),
-                      Expanded(child:
-                      Align(
-                        alignment: Alignment.topRight,
-                        child : Text(
-                          '${_filteredList[index].callingCode}',
-                          style: TextStyle(color: Color(0xFF522583)),
+                  padding: EdgeInsets.only(top: 16),
+                  controller: _scrollController,
+                  itemCount: _filteredList.length,
+                  separatorBuilder: (_, index) =>
+                      widget.showSeparator ? Divider() : Container(),
+                  itemBuilder: (_, index) {
+                    return InkWell(
+                      onTap: () {
+                        widget.onSelected?.call(_filteredList[index]);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            bottom: 12, top: 12, left: 48, right: 48),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Image.asset(
+                              _filteredList[index].flag,
+                              package: countryCodePackageName,
+                              width: widget.flagIconSize,
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Flexible(
+                              child: Text(
+                                '${_filteredList[index].name} (${_filteredList[index].countryCode})',
+                                style: TextStyle(color: Color(0xFF522583)),
+                              ),
+                            ),
+                            Flexible(
+                                child: Align(
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                '${_filteredList[index].callingCode}',
+                                style: TextStyle(color: Color(0xFF522583)),
+                              ),
+                            )),
+                          ],
                         ),
-                      )),
-                    ],
-                  ),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
         )
       ],
     );

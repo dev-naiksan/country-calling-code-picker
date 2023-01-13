@@ -72,7 +72,8 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
                             child: Text('Cancel'),
                             onPressed: () => Navigator.pop(context)),
                       ),
-                  Center(
+                  Align(
+                    alignment: Alignment.centerLeft,
                     child: title ??
                         Text(
                           'Choose region',
