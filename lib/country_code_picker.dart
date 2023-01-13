@@ -182,57 +182,60 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
         Expanded(
           child: _isLoading
               ? Center(child: CircularProgressIndicator())
-              : RawScrollbar(
-                  trackColor: Color(0xffCACACA),
-                  thickness: 8,
-                  radius: Radius.circular(5),
-                  // showTrackOnHover: true,
-                  isAlwaysShown: true,
-                  child: ListView.separated(
-                    padding: EdgeInsets.only(top: 16),
-                    controller: _scrollController,
-                    itemCount: _filteredList.length,
-                    separatorBuilder: (_, index) =>
-                        widget.showSeparator ? Divider() : Container(),
-                    itemBuilder: (_, index) {
-                      return InkWell(
-                        onTap: () {
-                          widget.onSelected?.call(_filteredList[index]);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.only(
-                              bottom: 12, top: 12, left: 48, right: 48),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Image.asset(
-                                _filteredList[index].flag,
-                                package: countryCodePackageName,
-                                width: widget.flagIconSize,
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Flexible(
-                                fit: FlexFit.tight,
-                                child: Text(
-                                  '${_filteredList[index].name} (${_filteredList[index].countryCode})',
-                                  style: TextStyle(color: Color(0xFF522583)),
+              : Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 12.0),
+                  child: RawScrollbar(
+                    trackColor: Color(0xffCACACA),
+                    thickness: 8,
+                    radius: Radius.circular(5),
+                    // showTrackOnHover: true,
+                    isAlwaysShown: true,
+                    child: ListView.separated(
+                      padding: EdgeInsets.only(top: 16),
+                      controller: _scrollController,
+                      itemCount: _filteredList.length,
+                      separatorBuilder: (_, index) =>
+                          widget.showSeparator ? Divider() : Container(),
+                      itemBuilder: (_, index) {
+                        return InkWell(
+                          onTap: () {
+                            widget.onSelected?.call(_filteredList[index]);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                bottom: 12, top: 12, left: 48, right: 48),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Image.asset(
+                                  _filteredList[index].flag,
+                                  package: countryCodePackageName,
+                                  width: widget.flagIconSize,
                                 ),
-                              ),
-                              Flexible(
-                                  child: Align(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  '${_filteredList[index].callingCode}',
-                                  style: TextStyle(color: Color(0xFF522583)),
+                                SizedBox(
+                                  width: 16,
                                 ),
-                              )),
-                            ],
+                                Flexible(
+                                  fit: FlexFit.tight,
+                                  child: Text(
+                                    '${_filteredList[index].name} (${_filteredList[index].countryCode})',
+                                    style: TextStyle(color: Color(0xFF522583)),
+                                  ),
+                                ),
+                                Flexible(
+                                    child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    '${_filteredList[index].callingCode}',
+                                    style: TextStyle(color: Color(0xFF522583)),
+                                  ),
+                                )),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
         ),
