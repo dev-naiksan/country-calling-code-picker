@@ -185,8 +185,9 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
               : Padding(
                   padding: const EdgeInsetsDirectional.only(end: 25.0),
                   child: RawScrollbar(
+                    minThumbLength:100.00,
                     trackColor: Color(0xffCACACA),
-                    thickness: 8,
+                    thickness: 5,
                     radius: Radius.circular(5),
                     // showTrackOnHover: true,
                     isAlwaysShown: true,
