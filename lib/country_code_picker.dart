@@ -133,9 +133,9 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
           child: Container(
             decoration: BoxDecoration(boxShadow: [
               new BoxShadow(
-                color: Colors.white70,
+                color: Colors.white,
                 blurRadius:
-                    5.0, // You can set this blurRadius as per your requirement
+                    30.0, // You can set this blurRadius as per your requirement
               ),
             ]),
             child: TextField(
@@ -154,19 +154,20 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                         }),
                       ),
                     ),
-                    prefixIcon: Visibility(
-                      visible: _controller.text.isEmpty,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 12.0),
                       child: InkWell(
                         child: Icon(Icons.search),
                       ),
                     ),
+                    prefixIconColor: Color(0xff522583),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     contentPadding:
-                        EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-                    hintText:'Search',
+                        EdgeInsets.only(left: 20, right: 16, top: 8, bottom: 8),
+                    hintText: 'Search',
                   ),
               textInputAction: TextInputAction.done,
               controller: _controller,
@@ -206,6 +207,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                               width: 16,
                             ),
                             Flexible(
+                              fit: FlexFit.tight,
                               child: Text(
                                 '${_filteredList[index].name} (${_filteredList[index].countryCode})',
                                 style: TextStyle(color: Color(0xFF522583)),

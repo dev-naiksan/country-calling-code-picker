@@ -72,7 +72,9 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
                             child: Text('Cancel'),
                             onPressed: () => Navigator.pop(context)),
                       ),
-                  Align(
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 20.0),
+                    child :Align(
                     alignment: Alignment.centerLeft,
                     child: title ??
                         Text(
@@ -83,7 +85,7 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                  ),
+                  ),),
                 ],
               ),
               SizedBox(height: 16),
