@@ -183,7 +183,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
           child: _isLoading
               ? Center(child: CircularProgressIndicator())
               : Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 12.0),
+                  padding: const EdgeInsetsDirectional.only(end: 25.0),
                   child: RawScrollbar(
                     trackColor: Color(0xffCACACA),
                     thickness: 8,
