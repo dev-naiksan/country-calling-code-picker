@@ -157,9 +157,11 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                     ),
                     prefixIcon: Padding(
                       padding: const EdgeInsetsDirectional.only(start: 12.0),
-                      child: Image.asset('assets/icons/search.png'),
+                      child: Icon(Icons.search,
+                          size: 18,
+                          color: Color(0xff522583)
+                      ),
                     ),
-                    prefixIconColor: Color(0xff522583),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(),
                       borderRadius: BorderRadius.circular(23),
