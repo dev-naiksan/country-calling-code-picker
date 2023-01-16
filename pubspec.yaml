@@ -20,7 +20,6 @@ dev_dependencies:
 
 flutter:
   assets:
-    - icons/
     - assets/icons/
     - flags/
     - raw/
