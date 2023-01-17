@@ -163,10 +163,10 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                           color: Color(0xff522583)
                       ),
                     ),
-                    // border: OutlineInputBorder(
-                    //   borderSide: BorderSide(),
-                    //   borderRadius: BorderRadius.circular(23),
-                    // ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(),
+                      borderRadius: BorderRadius.circular(23),
+                    ),
                     contentPadding:
                         EdgeInsets.only(left: 20, right: 16, top: 8, bottom: 8),
                     hintText: 'Search',
