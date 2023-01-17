@@ -144,17 +144,17 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
               style: widget.searchInputStyle,
               autofocus: widget.focusSearchBox,
               decoration: InputDecoration(
-                    suffixIcon: Visibility(
-                      visible: _controller.text.isNotEmpty,
-                      child: InkWell(
-                        child: Icon(Icons.clear),
-                        onTap: () => setState(() {
-                          _controller.clear();
-                          _filteredList.clear();
-                          _filteredList.addAll(_list);
-                        }),
-                      ),
-                    ),
+                    // suffixIcon: Visibility(
+                    //   visible: _controller.text.isNotEmpty,
+                    //   child: InkWell(
+                    //     child: Icon(Icons.clear),
+                    //     onTap: () => setState(() {
+                    //       _controller.clear();
+                    //       _filteredList.clear();
+                    //       _filteredList.addAll(_list);
+                    //     }),
+                    //   ),
+                    // ),
                     prefixIcon: Padding(
                       padding: const EdgeInsetsDirectional.only(start: 12.0),
                       child: Icon(Icons.search,
