@@ -130,14 +130,14 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
           height: 16,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 24, right: 24),
+          padding: const EdgeInsets.only(left: 30, right: 30),
           child: Container(
             decoration: BoxDecoration(
                 boxShadow: [
               new BoxShadow(
-                color: Color(0xffF7F7F7),
+                color: Colors.white,
                 blurRadius:
-                    10.0,
+                    30.0,
               ),
             ]),
             child: TextField(
@@ -170,14 +170,14 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
                   borderSide: BorderSide(
-                    color: Colors.white,
+                    color: Color(0xffF7F7F7),
                     width: 5.0
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
                   borderSide: BorderSide(
-                    color: Colors.white,
+                    color: Color(0xffF7F7F7),
                     width: 5.0,
                   ),
                 ),
