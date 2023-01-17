@@ -137,7 +137,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
               boxShadow: [
                 new CustomBoxShadow(
                     color: Color(0xffF7F7F7),
-                    blurRadius: 30.0,
+                    blurRadius: 20.0,
                     blurStyle: BlurStyle.outer),
               ],
               borderRadius: BorderRadius.circular(25.0),
