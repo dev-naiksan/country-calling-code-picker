@@ -132,19 +132,19 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
         Padding(
           padding: const EdgeInsets.only(left: 24, right: 24),
           child: Container(
-            decoration: BoxDecoration(boxShadow: [
+            decoration: BoxDecoration(
+                boxShadow: [
               new BoxShadow(
-                color: Color(0xffF7F7F7),
+                color: Color(0xffCACACA),
                 blurRadius:
-                    30.0,
+                    10.0,
                 offset: Offset(4, 8), // You can set this blurRadius as per your requirement
               ),
             ]),
             child: TextField(
               style: widget.searchInputStyle,
               autofocus: widget.focusSearchBox,
-              decoration: widget.searchInputDecoration ??
-                  InputDecoration(
+              decoration: InputDecoration(
                     suffixIcon: Visibility(
                       visible: _controller.text.isNotEmpty,
                       child: InkWell(
@@ -163,10 +163,24 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                           color: Color(0xff522583)
                       ),
                     ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                      borderRadius: BorderRadius.circular(23),
-                    ),
+                // enabledBorder: OutlineInputBorder(
+                //       borderSide: BorderSide(color: Colors.red),
+                //       borderRadius: BorderRadius.circular(23),
+                //     ),
+
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                    width: 5.0,
+                  ),
+                ),
                     contentPadding:
                         EdgeInsets.only(left: 20, right: 16, top: 8, bottom: 8),
                     hintText: 'Search',
