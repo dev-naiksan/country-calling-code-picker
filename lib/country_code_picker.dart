@@ -1,5 +1,6 @@
 library countrycodepicker;
 
+import 'package:country_calling_code_picker/custom_box_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
 import 'package:flutter_svg/svg.dart';
@@ -133,58 +134,37 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
           padding: const EdgeInsets.only(left: 30, right: 30),
           child: Container(
             decoration: BoxDecoration(
-                boxShadow: [
-              new BoxShadow(
-                color: Colors.white,
-                blurRadius:
-                    30.0,
-              ),
-            ]),
+              boxShadow: [
+                new CustomBoxShadow(
+                    color: Colors.black,
+                    offset: new Offset(5.0, 5.0),
+                    blurRadius: 5.0,
+                    blurStyle: BlurStyle.outer),
+              ],
+            ),
             child: TextField(
               style: widget.searchInputStyle,
               autofocus: widget.focusSearchBox,
               decoration: InputDecoration(
-                    // suffixIcon: Visibility(
-                    //   visible: _controller.text.isNotEmpty,
-                    //   child: InkWell(
-                    //     child: Icon(Icons.clear),
-                    //     onTap: () => setState(() {
-                    //       _controller.clear();
-                    //       _filteredList.clear();
-                    //       _filteredList.addAll(_list);
-                    //     }),
-                    //   ),
-                    // ),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsetsDirectional.only(start: 12.0),
-                      child: Icon(Icons.search,
-                          size: 18,
-                          color: Color(0xff522583)
-                      ),
-                    ),
-                // enabledBorder: OutlineInputBorder(
-                //       borderSide: BorderSide(color: Colors.red),
-                //       borderRadius: BorderRadius.circular(23),
-                //     ),
-
+                prefixIcon: Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 12.0),
+                  child: Icon(Icons.search, size: 18, color: Color(0xff522583)),
+                ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(
-                    color: Color(0xffF7F7F7),
-                    width: 5.0
-                  ),
+                  borderSide: BorderSide(color: Color(0xffF7F7F7), width: 1.0),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
                   borderSide: BorderSide(
                     color: Color(0xffF7F7F7),
-                    width: 5.0,
+                    width: 1.0,
                   ),
                 ),
-                    contentPadding:
-                        EdgeInsets.only(left: 20, right: 16, top: 8, bottom: 8),
-                    hintText: 'Search',
-                  ),
+                contentPadding:
+                    EdgeInsets.only(left: 20, right: 16, top: 8, bottom: 8),
+                hintText: 'Search',
+              ),
               textInputAction: TextInputAction.done,
               controller: _controller,
               onChanged: _onSearch,
@@ -200,7 +180,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
               : Padding(
                   padding: const EdgeInsetsDirectional.only(end: 25.0),
                   child: RawScrollbar(
-                    minThumbLength:60.00,
+                    minThumbLength: 60.00,
                     trackColor: Color(0xffCACACA),
                     thickness: 5,
                     radius: Radius.circular(5),
