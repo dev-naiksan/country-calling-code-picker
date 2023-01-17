@@ -136,12 +136,13 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
             decoration: BoxDecoration(
               boxShadow: [
                 new CustomBoxShadow(
-                    color: Colors.black,
-                    offset: new Offset(5.0, 5.0),
-                    blurRadius: 5.0,
+                    color: Color(0xffF7F7F7),
+                    blurRadius: 10.0,
                     blurStyle: BlurStyle.outer),
               ],
-            ),
+              borderRadius: BorderRadius.circular(25.0),
+
+    ),
             child: TextField(
               style: widget.searchInputStyle,
               autofocus: widget.focusSearchBox,
@@ -151,13 +152,12 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                   child: Icon(Icons.search, size: 18, color: Color(0xff522583)),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                  borderSide: BorderSide(color: Color(0xffF7F7F7), width: 1.0),
+                  borderSide: BorderSide(color: Colors.white, width: 1.0),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
                   borderSide: BorderSide(
-                    color: Color(0xffF7F7F7),
+                    color: Colors.white,
                     width: 1.0,
                   ),
                 ),
