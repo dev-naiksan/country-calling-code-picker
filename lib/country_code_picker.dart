@@ -164,7 +164,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                       ),
                     ),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(color: Colors.red),
                       borderRadius: BorderRadius.circular(23),
                     ),
                     contentPadding:
