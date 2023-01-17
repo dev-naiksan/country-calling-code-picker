@@ -134,7 +134,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
           child: Container(
             decoration: BoxDecoration(boxShadow: [
               new BoxShadow(
-                color: Colors.white,
+                color: Color(0xffF7F7F7),
                 blurRadius:
                     30.0,
                 offset: Offset(4, 8), // You can set this blurRadius as per your requirement
@@ -164,7 +164,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
                       ),
                     ),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(),
+                      borderSide: BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(23),
                     ),
                     contentPadding:
