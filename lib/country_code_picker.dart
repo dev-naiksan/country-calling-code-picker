@@ -136,13 +136,12 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
             decoration: BoxDecoration(
               boxShadow: [
                 new CustomBoxShadow(
-                    color: Color(0xffF7F7F7),
+                    color: Color(0xffCACACA),
                     blurRadius: 20.0,
                     blurStyle: BlurStyle.outer),
               ],
               borderRadius: BorderRadius.circular(25.0),
-
-    ),
+            ),
             child: TextField(
               style: widget.searchInputStyle,
               autofocus: widget.focusSearchBox,
