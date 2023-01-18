@@ -74,22 +74,24 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
                       ),
                   Padding(
                     padding: const EdgeInsetsDirectional.only(start: 20.0),
-                    child :Align(
-                    alignment: Alignment.centerLeft,
-                    child: title ??
-                        Text(
-                          'Choose region',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: title ??
+                          Text(
+                            'Choose region',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                  ),),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 16),
-              Expanded(
+              Container(
+                height: MediaQuery.of(context).size.height * 0.8,
                 child: CountryPickerWidget(
                   onSelected: (country) => Navigator.of(context).pop(country),
                 ),
