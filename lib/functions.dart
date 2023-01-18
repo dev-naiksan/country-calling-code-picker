@@ -56,11 +56,18 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
               topLeft: Radius.circular(cornerRadius),
               topRight: Radius.circular(cornerRadius))),
       builder: (BuildContext context) {
-        return Padding(
+        return Scaffold(
+            resizeToAvoidBottomInset:false,
+            backgroundColor: Colors.transparent,
+            body: MediaQuery(
+            // Allow the usage of SafeArea inside the drawer https://github.com/flutter/flutter/issues/103585#issuecomment-1124709577
+            data: MediaQueryData.fromWindow(WidgetsBinding.instance.window),
+        child:
+          Padding(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
-            height: MediaQuery.of(context).size.height * heightFactor,
+            height: heightFactor,
          child : Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -101,7 +108,7 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
               ),
             ],
           ),
-        ),);
+        ),)));
       });
 }
 
