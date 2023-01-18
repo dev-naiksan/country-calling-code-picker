@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final country = _selectedCountry;
     return Scaffold(
+        resizeToAvoidBottomInset:false,
       appBar: AppBar(
         title: Text('Country Calling Code Picker'),
       ),
