@@ -66,7 +66,9 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
           Padding(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Column(
+          child: Container(
+            height: MediaQuery.of(context).size.height * heightFactor,
+         child : Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               SizedBox(height: 16),
@@ -106,7 +108,7 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
               ),
             ],
           ),
-        ),));
+        ),)));
       });
 }
 
