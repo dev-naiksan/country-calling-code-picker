@@ -56,59 +56,53 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
               topLeft: Radius.circular(cornerRadius),
               topRight: Radius.circular(cornerRadius))),
       builder: (BuildContext context) {
-        return Scaffold(
-            resizeToAvoidBottomInset:false,
-            backgroundColor: Colors.transparent,
-            body: MediaQuery(
-            // Allow the usage of SafeArea inside the drawer https://github.com/flutter/flutter/issues/103585#issuecomment-1124709577
-            data: MediaQueryData.fromWindow(WidgetsBinding.instance.window),
-        child:
-          Padding(
+        return Padding(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
-            height: heightFactor,
-         child : Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(height: 16),
-              Stack(
-                children: <Widget>[
-                  cancelWidget ??
-                      Positioned(
-                        right: 8,
-                        top: 4,
-                        bottom: 0,
-                        child: TextButton(
-                            child: Text('Cancel'),
-                            onPressed: () => Navigator.pop(context)),
-                      ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(start: 20.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: title ??
-                          Text(
-                            'Choose region',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500,
+            height: MediaQuery.of(context).size.height * heightFactor,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(height: 16),
+                Stack(
+                  children: <Widget>[
+                    cancelWidget ??
+                        Positioned(
+                          right: 8,
+                          top: 4,
+                          bottom: 0,
+                          child: TextButton(
+                              child: Text('Cancel'),
+                              onPressed: () => Navigator.pop(context)),
+                        ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 20.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: title ??
+                            Text(
+                              'Choose region',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Expanded(
-                child: CountryPickerWidget(
-                  onSelected: (country) => Navigator.of(context).pop(country),
+                  ],
                 ),
-              ),
-            ],
+                SizedBox(height: 16),
+                Expanded(
+                  child: CountryPickerWidget(
+                    onSelected: (country) => Navigator.of(context).pop(country),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),)));
+        );
       });
 }
 
