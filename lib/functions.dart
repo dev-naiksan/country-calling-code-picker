@@ -90,13 +90,10 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
                 ],
               ),
               SizedBox(height: 16),
-              Container(
-                height: MediaQuery.of(context).size.height * heightFactor,
-                child: Expanded(
+                 Expanded(
                   child: CountryPickerWidget(
                     onSelected: (country) => Navigator.of(context).pop(country),
                   ),
-                ),
               ),
             ],
           ),
