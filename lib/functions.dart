@@ -61,9 +61,7 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
             height: MediaQuery.of(context).size.height * heightFactor,
-            child:SingleChildScrollView(
-            child:
-            Column(
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SizedBox(height: 16),
@@ -96,15 +94,13 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
                   ],
                 ),
                 SizedBox(height: 16),
-                Expanded(
-                  child: CountryPickerWidget(
-                    onSelected: (country) => Navigator.of(context).pop(country),
-                  ),
+                CountryPickerWidget(
+                  onSelected: (country) => Navigator.of(context).pop(country),
                 ),
               ],
             ),
           ),
-        ),);
+        );
       });
 }
 
