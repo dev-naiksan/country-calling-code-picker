@@ -59,6 +59,7 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
         return Container(
           height: MediaQuery.of(context).size.height * heightFactor,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               SizedBox(height: 16),
               Stack(
@@ -90,10 +91,10 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
                 ],
               ),
               SizedBox(height: 16),
-                 Expanded(
-                  child: CountryPickerWidget(
-                    onSelected: (country) => Navigator.of(context).pop(country),
-                  ),
+              Expanded(
+                child: CountryPickerWidget(
+                  onSelected: (country) => Navigator.of(context).pop(country),
+                ),
               ),
             ],
           ),
